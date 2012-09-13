@@ -15,7 +15,8 @@ p = zeros(m, 1);
 %               You should set p to a vector of 0's and 1's
 %
 
-
+h_theta = sigmoid(X*theta);  % 100x1
+p = (h_theta >= 0.5);
 
 
 
