@@ -62,23 +62,32 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% Theta 1 % 25x401
+% Theta 2 % 10x26
+
+a_1 = [ones(m, 1) X]; % 5000x401
+a_2 = [ones(m, 1) sigmoid(a_1*Theta1')]; % 5000x401 x 401x25 (+ a col) = 5000x26
+a_3 = sigmoid(a_2*Theta2'); % 5000x26 x 26x10 = 5000x10
+
+% m = 5000
+% y = 5000x1
+
+new_y = y_transform(y, num_labels); % 5000x10
+
+J = (1/m) * sum(sum((-new_y.*log(a_3) - (1-new_y).*log(1-a_3)))) + lambda/(2*m)*(sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
 
 
+s_3 = a_3 - new_y; % 5000x10
+z_2 = a_1*Theta1'; % 5000x401 x 401x25 = 5000x25
+s_2 = (s_3*Theta2)(:,2:end).*sigmoidGradient(z_2); % 5000x10 x 10x26 = 5000x26 => 5000x25
 
+for t = 1:m
+    Theta1_grad += s_2(t,:)'*a_1(t,:); % 25x1 x 1x401 = 25x401    
+    Theta2_grad += s_3(t,:)'*a_2(t,:); % 10x1 x 1x26 = 10x26
+end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+Theta1_grad /= m;
+Theta2_grad /= m;
 
 % -------------------------------------------------------------
 
@@ -88,4 +97,9 @@ Theta2_grad = zeros(size(Theta2));
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
 
+end
+
+function [r] = y_transform(y, num_labels)
+    t = 1:num_labels;
+    r = (t == y);
 end
