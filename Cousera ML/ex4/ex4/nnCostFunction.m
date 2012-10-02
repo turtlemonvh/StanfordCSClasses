@@ -86,8 +86,12 @@ for t = 1:m
     Theta2_grad += s_3(t,:)'*a_2(t,:); % 10x1 x 1x26 = 10x26
 end
 
-Theta1_grad /= m;
-Theta2_grad /= m;
+T1_reg_param = lambda/m*Theta1;
+T1_reg_param(:,1) *= 0;
+T2_reg_param = lambda/m*Theta2;
+T2_reg_param(:,1) *= 0;
+Theta1_grad = 1/m*Theta1_grad + T1_reg_param;
+Theta2_grad = 1/m*Theta2_grad + T2_reg_param;
 
 % -------------------------------------------------------------
 

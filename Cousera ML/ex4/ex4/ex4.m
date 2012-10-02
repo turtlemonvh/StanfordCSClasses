@@ -18,6 +18,8 @@
 %% Initialization
 clear ; close all; clc
 
+warning ("off", "Octave:broadcast");
+
 %% Setup the parameters you will use for this exercise
 input_layer_size  = 400;  % 20x20 Input Images of Digits
 hidden_layer_size = 25;   % 25 hidden units
@@ -183,10 +185,10 @@ fprintf('\nTraining Neural Network... \n')
 
 %  After you have completed the assignment, change the MaxIter to a larger
 %  value to see how more training helps.
-options = optimset('MaxIter', 50);
+options = optimset('MaxIter', 400);
 
 %  You should also try different values of lambda
-lambda = 1;
+lambda = 0.5;
 
 % Create "short hand" for the cost function to be minimized
 costFunction = @(p) nnCostFunction(p, ...
