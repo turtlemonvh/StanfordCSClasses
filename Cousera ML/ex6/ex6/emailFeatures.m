@@ -48,10 +48,11 @@ x = zeros(n, 1);
 %
 %
 
-
-
-
-
+for i = 1:length(x)
+    if sum(word_indices == i) > 0
+        x(i) = 1;
+    end
+end
 
 
 
