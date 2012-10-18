@@ -137,6 +137,7 @@ displayData(U(:, 1:36)');
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
+sleep(5);
 
 
 %% ============= Part 6: Dimension Reduction for Faces =================

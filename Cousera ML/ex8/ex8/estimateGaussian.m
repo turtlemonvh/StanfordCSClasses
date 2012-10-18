@@ -22,9 +22,10 @@ sigma2 = zeros(n, 1);
 %
 
 
-
-
-
+% size(X) % 307x2
+mu = mean(X,1)';
+% sigma2 = mean((X - mu').^2,1);
+sigma2 = mean(bsxfun(@minus, X, mu').^2,1);
 
 
 

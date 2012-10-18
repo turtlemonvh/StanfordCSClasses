@@ -21,11 +21,12 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+% X % 300x2
+% centroids % 3x2
 
-
-
-
-
+for i = 1:size(X,1)
+    [~, idx(i)] = min(sum(bsxfun(@minus,X(i,:),centroids).^2,2)); % broadcast minus into all centroids and choose one that gives smallest squared error
+end
 
 % =============================================================
 
