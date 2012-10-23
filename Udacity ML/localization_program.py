@@ -49,15 +49,8 @@ def move(p,motion):
     q = [[0 for i in range(w)] for i in range(h)]
     for i in range(h):
         for j in range(w):
-            # [dx,dy]; right down
             q[i][j] += p[i][j]*(1-p_move)
-            #print i,j, " | ", (i+motion[1]) % h, (j+motion[0]) % w
             q[i][j] += p[(i-motion[0]) % h][(j-motion[1]) % w]*(p_move)
-    total_sum = sum([sum(i) for i in q])
-    #print total_sum
-    for i in range(h):
-        for j in range(w):
-            q[i][j] /= total_sum
     return q
 
 for i in range(len(measurements)):
