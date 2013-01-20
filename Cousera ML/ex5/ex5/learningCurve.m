@@ -53,9 +53,20 @@ error_val   = zeros(m, 1);
 
 % ---------------------- Sample Solution ----------------------
 
+% [J, grad] = linearRegCostFunction(X, y, theta, lambda)
 
+for i = 1:m
+    % Get current training set
+    X_temp_train = X(1:i,:);
+    y_temp_train = y(1:i);
 
-
+    % Train
+    [theta] = trainLinearReg(X_temp_train, y_temp_train, lambda);
+    
+    % Compute errors, first for training set then cross validation set
+    error_train(i) = linearRegCostFunction(X_temp_train, y_temp_train, theta, 0);
+    error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+end
 
 
 

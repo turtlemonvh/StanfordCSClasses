@@ -15,7 +15,8 @@ X_poly = zeros(numel(X), p);
 %
 % 
 
-
+powers = 1:1:p;
+X_poly = X.^powers;
 
 
 
